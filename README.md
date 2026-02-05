@@ -6,63 +6,63 @@
 
 
 
-\## LTX2 Sound-to-Video Workflow
+## LTX2 Sound-to-Video Workflow
 
 
 
-\### LTX2\_S2V\_GGUF\_12GB.json
+### LTX2\_S2V\_GGUF\_12GB.json
 
-\- \*\*公開日\*\*: 2026年1月28日
+- \*\*公開日\*\*: 2026年1月28日
 
-\- \*\*説明\*\*: LTX2でSound-to-Videoを実現するComfyUIワークフロー
+- \*\*説明\*\*: LTX2でSound-to-Videoを実現するComfyUIワークフロー
 
-\- \*\*モデル\*\*: LTX-AV GGUF 12GBモデル対応
+- \*\*モデル\*\*: LTX-AV GGUF 12GBモデル対応
 
-\- \*\*Civitai版を修正\*\*: 修正版ワークフロー
-
-
-
-\#### 機能
-
-\- 音声ファイル（Qwen3-TTS等で生成）からリップシンク動画を生成
-
-\- 複数人会話対応（声ごとに顔を指定可能）
-
-\- 25fps、最大13秒（326フレーム）の動画生成
-
-\- 10分で13秒の動画を生成
+- \*\*Civitai版を修正\*\*: 修正版ワークフロー
 
 
 
-\#### 必要なノード
+#### 機能
 
-\- LTXVGemmaCLIPModelLoader
+- 音声ファイル（Qwen3-TTS等で生成）からリップシンク動画を生成
 
-\- LTXVAudioVAELoader
+- 複数人会話対応（声ごとに顔を指定可能）
 
-\- MultimodalGuider
+- 25fps、最大13秒（326フレーム）の動画生成
 
-\- EmptyLTXVLatentVideo
-
-\- LTXVEmptyLatentAudio
-
-\- LTXVConditioning
-
-\- LTXVConcatAVLatent
-
-\- LTXVSeparateAVLatent
+- 10分で13秒の動画を生成
 
 
 
-\#### 使用モデル
+#### 必要なノード
 
-\- ltx-av-step-1751000\_vocoder\_24K.safetensors
+- LTXVGemmaCLIPModelLoader
 
-\- gemma-3-12b-it-qat-q4\_0-unquantized\_readout\_proj
+- LTXVAudioVAELoader
+
+- MultimodalGuider
+
+- EmptyLTXVLatentVideo
+
+- LTXVEmptyLatentAudio
+
+- LTXVConditioning
+
+- LTXVConcatAVLatent
+
+- LTXVSeparateAVLatent
 
 
 
-\#### 使い方
+#### 使用モデル
+
+- ltx-av-step-1751000\_vocoder\_24K.safetensors
+
+- gemma-3-12b-it-qat-q4\_0-unquantized\_readout\_proj
+
+
+
+#### 使い方
 
 1\. ComfyUIを起動
 
@@ -78,31 +78,31 @@
 
 
 
-\#### 注意事項
+#### 注意事項
 
-\- \*\*重要\*\*: LTX2は音声生成機能を持たないため、音声は別途TTSで生成する必要があります
+- \*\*重要\*\*: LTX2は音声生成機能を持たないため、音声は別途TTSで生成する必要があります
 
-\- VRAMは12GB以上推奨（GGUF版使用）
-
-
-
-\#### 参考
-
-\- Civitai版LTX2 Workflow
-
-\- FlybirdXX氏のComfyUI-Qwen3-TTS
-
-\- YouTube動画: 【Qwen3-TTS ComfyUI】エラー完全解決！Coqui超え日本語音声＋LTX2複数人会話
+- VRAMは12GB以上推奨（GGUF版使用）
 
 
 
-\#### クレジット
+#### 参考
 
-\- 開発: 老後AI (takejii)
+- Civitai版LTX2 Workflow
 
-\- ComfyUI-Qwen3-TTS: FlybirdXX
+- FlybirdXX氏のComfyUI-Qwen3-TTS
 
-\- LTX2モデル: Lightricks
+- YouTube動画: 【Qwen3-TTS ComfyUI】エラー完全解決！Coqui超え日本語音声＋LTX2複数人会話
+
+
+
+#### クレジット
+
+- 開発: 老後AI (takejii)
+
+- ComfyUI-Qwen3-TTS: FlybirdXX
+
+- LTX2モデル: Lightricks
 
 ## Z-Image Hybrid Workflow
 
