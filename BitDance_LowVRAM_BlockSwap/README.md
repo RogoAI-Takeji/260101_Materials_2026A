@@ -2,6 +2,12 @@
 
 ComfyUI custom node (nodes.py) with block-swap optimization for running BitDance 14B on low VRAM GPUs.
 
+## Tutorial Video
+
+[![老後AI - BitDance BlockSwap](https://img.youtube.com/vi/kXjmxIa8l5Y/0.jpg)](https://youtu.be/kXjmxIa8l5Y)
+
+https://youtu.be/kXjmxIa8l5Y
+
 ## Overview
 
 BitDance 14B normally requires 24GB+ VRAM due to its large text encoder (18GB+).
@@ -20,7 +26,7 @@ KV-cache is also offloaded to CPU between blocks.
 
 | VRAM | Recommended num_gpu_blocks |
 |------|---------------------------|
-| 16GB | 15 |
+| 16GB | 15 (verified) |
 | 12GB | 10 (untested) |
 | 8GB  | 5 (untested) |
 
@@ -49,11 +55,15 @@ Recommended: Use FP8 versions from ComfyUI Blog for reduced VRAM usage.
 
 ## Usage
 
-1. Replace `nodes.py` in your `custom_nodes/Comfyui-bitdance/` folder
-2. Restart ComfyUI
-3. Load `BitDance_14B_64x_portrait.json` workflow
-4. Set `num_gpu_blocks: 15` in the BitDanceSampler node (adjust for your VRAM)
-5. Run
+> **Important:** Before replacing `nodes.py`, back up the original file.
+> Rename it to `nodes.py.bak` or keep a copy in a safe location.
+
+1. Back up the original `nodes.py` in `custom_nodes/Comfyui-bitdance/` (rename to `nodes.py.bak`)
+2. Copy this `nodes.py` to `custom_nodes/Comfyui-bitdance/`
+3. Restart ComfyUI
+4. Load `BitDance_14B_64x_portrait.json` workflow
+5. Set `num_gpu_blocks: 15` in the BitDanceSampler node (adjust for your VRAM)
+6. Run
 
 ## License
 
@@ -62,4 +72,4 @@ Apache 2.0 (same as original BitDance repository)
 ## Credits
 
 - Original BitDance: [shallowdream204/BitDance](https://github.com/shallowdream204/BitDance)
-- Block-swap implementation: [RogoAI-Takeji](https://github.com/RogoAI-Takeji) / YouTube: 老後AI (RogoAI)
+- Block-swap implementation: [RogoAI-Takeji](https://github.com/RogoAI-Takeji) / YouTube: [老後AI (RogoAI)](https://youtu.be/kXjmxIa8l5Y)
