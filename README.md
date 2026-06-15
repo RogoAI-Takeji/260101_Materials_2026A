@@ -203,7 +203,7 @@
 #### 必要なカスタムノード
 
 - ComfyUI-Licon-MSR（LiconMSR）
-- ComfyUI-PromptRelay（PromptRelayEncode）※V2は必須。requirements未記載の場合あり
+- kijai/ComfyUI-PromptRelay（PromptRelayEncode）※V2は必須。requirements未記載の場合あり → custom_nodes に git clone
 - ComfyUI-LTXVideo（LTXICLoRALoaderModelOnly / LTXAddVideoICLoRAGuide 他）
 - ComfyUI-KJNodes（VAELoaderKJ / ImageResizeKJv2）
 - ComfyUI-GGUF（UnetLoaderGGUF）
@@ -230,13 +230,15 @@
 - 入力画像の解像度が異なると人物のアスペクト比に影響が出ます
 - segment length（時間軸設定）は現状エラー回避のため空欄で運用
 - ガイド用フレームが冒頭一瞬だけ出力に漏れる場合あり → 冒頭カット、または frame index を調整
-- `Missing Node` / `Undefined Output Error` が出たら ComfyUI-PromptRelay を custom_nodes に git clone
+- `Missing Node` / `Undefined Output Error` が出たら kijai/ComfyUI-PromptRelay を custom_nodes に git clone
 
 #### 参考
 
 - MSR LoRA: https://huggingface.co/LiconStudio/LTX-2.3-Multiple-Subject-Reference
 - カスタムノード: https://github.com/liconstudio/ComfyUI-Licon-MSR
-- ワークフロー参考: https://huggingface.co/RuneXX/LTX-2.3-Workflows
+- Prompt Relay ノード（V2必須）: https://github.com/kijai/ComfyUI-PromptRelay
+- LTX Director（時間軸側・参考 / WhatDreamsCost）: https://github.com/WhatDreamsCost/WhatDreamsCost-ComfyUI
+- ワークフロー元: https://huggingface.co/RuneXX/LTX-2.3-Workflows
 - YouTube動画: （動画タイトルを記入）
 
 #### クレジット
