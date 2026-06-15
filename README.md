@@ -132,8 +132,8 @@
 ### bernini_r2v_gguf_dual_ui.json
 
 - **公開日**: 2026年6月14日
-- **説明**: Wan 2.2 Bernini-R の R2V（Reference-to-Video）ワークフロー（ルートB / GGUF版）。公式・Kijai版とも R2V 用が提供されていないため、当チャンネルで作成
-- **対応**: 16GB VRAM（RTX 4060 Ti 16GB）で検証済み。低VRAM向けGGUF（Q4_K_M）構成
+- **説明**: Wan 2.2 Bernini-R の R2V（Reference-to-Video）ワークフロー（ルートB / GGUFデュアルエキスパート / UI形式）。`neuregex/ComfyUI-BerniniR` の `workflows/ui/` には t2v・i2i・i2i_gguf_dual はあるが **R2V のUIワークフローが無い**ため、当チャンネルで作成
+- **対応**: 16GB VRAM（RTX 4060 Ti 16GB）で検証済み。低VRAM向けGGUF（Q4_K_M / デュアルエキスパート）構成
 - **ルートAについて**: ルートA（fp8 native）はKijaiのオリジナルワークフローをそのまま使用し、ソースビデオの結線を外せばR2V化できます（当リポジトリでは配布しません）
 - **YouTube解説**: （動画タイトルを記入）
 
@@ -145,13 +145,13 @@
 
 #### 必要なカスタムノード
 
-- ComfyUI-GGUF（UnetLoaderGGUF）
-- ルートB用 Bernini-R ノードパック（BerniniRApplyPatches / BerniniRGuider / BerniniRSourceStream）
+- ComfyUI-BerniniR（neuregex / Apache-2.0）— BerniniRApplyPatches / BerniniRGuider / BerniniRSourceStream
+- ComfyUI-GGUF（city96）— UnetLoaderGGUF
 
 #### 使用モデル
 
-- bernini_r_high_noise_14B-Q4_K_M.gguf
-- bernini_r_low_noise_14B-Q4_K_M.gguf
+- bernini_r_high_noise_14B-Q4_K_M.gguf ／ bernini_r_low_noise_14B-Q4_K_M.gguf
+  （配布元: https://huggingface.co/neuregex/Bernini-R-GGUF → `ComfyUI/models/unet/`）
 - umt5_xxl_fp8_e4m3fn_scaled.safetensors（CLIP / wan）
 - wan_2.1_vae.safetensors（VAE）
 
@@ -173,6 +173,9 @@
 #### 参考
 
 - 公式: https://github.com/bytedance/Bernini
+- ルートB ノードパック: https://github.com/neuregex/ComfyUI-BerniniR
+- GGUF重み: https://huggingface.co/neuregex/Bernini-R-GGUF
+- ComfyUI-GGUF: https://github.com/city96/ComfyUI-GGUF
 - ルートA用 fp8重み(Kijai): https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled/tree/main/Bernini
 - YouTube動画: （動画タイトルを記入）
 
@@ -180,6 +183,7 @@
 
 - 開発: 老後AI (takejii)
 - Bernini: ByteDance (Apache-2.0)
+- ルートB ComfyUI-BerniniR: neuregex (Apache-2.0)
 - ルートA fp8重み / オリジナルワークフロー: Kijai
 
 ## LTX 2.3 MSR Fixed Workflow
