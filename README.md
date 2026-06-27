@@ -2,6 +2,140 @@
 
 ---
 
+## SCAIL-2 / SAM 3.1 Video Workflows
+
+### workflows/sam3.1_t2v_test.json
+
+- **公開日**: 2026年6月27日
+- **説明**: SAM 3.1で動画内の対象を検出・追跡し、そのマスクをLTX 2.3 masked T2V / refineへ渡す検証用ComfyUIワークフロー
+- **構成**: Stage 1で低解像度masked T2Vを生成し、フレームとマスクを640x360へ拡大後、Stage 2で低denoise refinementを行う
+- **YouTube解説**: SCAIL-2 / SAM 3.1 / RoPE拡張の検証動画
+
+#### 機能
+
+- SAM 3.1による初期フレームの対象検出
+- SAM 3.1による動画全体の対象追跡
+- 追跡マスクのプレビュー動画とマスク動画を出力
+- LTX 2.3 GGUFモデルによるmasked T2V置換
+- 低解像度生成後の640x360 refine
+
+#### 必要なカスタムノード
+
+- SAM 3 / SAM 3.1 ComfyUI nodes
+- ComfyUI-LTXVideo
+- ComfyUI-GGUF
+- ComfyUI-KJNodes
+- ComfyUI-VideoHelperSuite
+- Easy Use nodes
+
+#### 使用モデル
+
+- sam3.1_multiplex_fp16.safetensors
+- ltx-2.3-22b-distilled-Q4_K_M.gguf
+- ltx23_inpaint_masked_t2v_rank128_v1_02500steps.safetensors
+- LTX23_video_vae_bf16.safetensors
+- gemma_3_12B_it_fp8_e4m3fn.safetensors
+- ltx-2.3_text_projection_bf16.safetensors
+
+#### 使い方
+
+1. ComfyUIを起動
+2. `workflows/sam3.1_t2v_test.json` を読み込む
+3. 入力動画を指定する
+4. `Mask Target Prompt` に追跡したい対象を入力する
+5. `T2V Replacement Prompt` に置換後の見た目・動きを入力する
+6. マスクプレビューを確認してから本生成する
+
+#### 注意事項
+
+- モデル本体、入力動画、参照画像は含めていません
+- LTX 2.3本体はLightricks community licenseです
+- LTX 2.3 Inpaint LoRAはAlissonerdx/LTX-LoRAs由来です
+- SAM 3.1はMetaのSAM licenseに従ってください
+- 小さな対象や密集した群れでは追跡が外れる場合があります
+
+#### 参考
+
+- SAM 3: https://github.com/facebookresearch/sam3
+- SAM 3.1 model: https://huggingface.co/facebook/sam3
+- LTX 2.3: https://huggingface.co/Lightricks/LTX-2.3
+- LTX 2.3 Inpaint LoRA: https://huggingface.co/Alissonerdx/LTX-LoRAs
+- ComfyUI-LTXVideo: https://github.com/Lightricks/ComfyUI-LTXVideo
+- ComfyUI-GGUF: https://github.com/city96/ComfyUI-GGUF
+- ComfyUI-KJNodes: https://github.com/kijai/ComfyUI-KJNodes
+- ComfyUI-VideoHelperSuite: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite
+
+#### クレジット
+
+- 開発: 老後AI (takejii)
+- SAM 3 / SAM 3.1: Meta
+- LTX 2.3: Lightricks
+- LTX 2.3 Inpaint LoRA: Alissonerdx
+
+### workflows/my_video_wan21_scail2_auto_long_metabatch_preview_range_lightx2v_4step.json
+
+- **公開日**: 2026年6月27日
+- **説明**: SCAIL-2 / Wan 2.1 の長尺動画生成用ComfyUIワークフロー。MetaBatchで動画をチャンク処理し、preview range、フレーム間引き、出力fps調整、LightX2V 4-step設定に対応
+- **対応**: ローカルComfyUI環境向け。入力動画と参照画像はサンプル名に置換済み
+- **YouTube解説**: SCAIL-2 / RoPE拡張の検証動画
+
+#### 機能
+
+- SCAIL-2のポーズ動画参照を長尺動画向けにチャンク分割
+- MetaBatchで自動再キューし、最終動画へ連結
+- `start_frame` / `process_frames` によるpreview range確認
+- `select_every_nth` / `force_rate` によるフレーム選択と出力fps制御
+- LightX2V Wan 2.1 I2V rank64 LoRAを使った4-step高速化設定
+- `overlap_frames=0` の独立チャンク生成と、重なりありの連続生成を切り替え可能
+
+#### 必要なカスタムノード
+
+- ComfyUI native SCAIL-2 nodes
+- ComfyUI-VideoHelperSuite
+- ComfyUI-GGUF
+- SCAIL-2 long-video helper nodes
+
+#### 使用モデル
+
+- SCAIL-2 / Wan 2.1 model or GGUF variant
+- wan2.1_SCAIL_2_DPO_lora_bf16.safetensors
+- lightx2v_I2V_14B_480p_cfg_step_distill_rank64_bf16.safetensors
+- umt5_xxl_fp8_e4m3fn_scaled.safetensors
+- Wan2_1_VAE_bf16.safetensors
+- clip_vision_h.safetensors
+- sam3.1_multiplex_fp16.safetensors
+
+#### 使い方
+
+1. ComfyUIを起動
+2. `workflows/my_video_wan21_scail2_auto_long_metabatch_preview_range_lightx2v_4step.json` を読み込む
+3. `example_driving_video.mp4` を任意の駆動動画に置き換える
+4. `example_reference_image.png` を任意の参照画像に置き換える
+5. preview rangeで短い範囲を確認してから、必要に応じて全体を生成する
+
+#### 注意事項
+
+- モデル本体、入力動画、参照画像は含めていません
+- workflow内の入力ファイル名は公開用のプレースホルダーです
+- 長尺生成ではチャンク境界で見た目や動きが揺れる場合があります
+- 音声は含めていません。必要な場合は生成後に元動画の音声を合成してください
+
+#### 参考
+
+- SCAIL-2: https://github.com/zai-org/SCAIL-2
+- Comfy-Org SCAIL-2: https://huggingface.co/Comfy-Org/SCAIL-2
+- Wan 2.1: https://github.com/Wan-Video/Wan2.1
+- LightX2V LoRA: https://huggingface.co/Kijai/WanVideo_comfy/tree/main/Lightx2v
+- ComfyUI-VideoHelperSuite: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite
+- ComfyUI-GGUF: https://github.com/city96/ComfyUI-GGUF
+
+#### クレジット
+
+- 開発: 老後AI (takejii)
+- SCAIL-2: Zhipu AI / Z.ai
+- Wan 2.1: Alibaba
+- LightX2V / ComfyUI model packaging: Kijai / Comfy-Org
+
 ## LTX2 Sound-to-Video Workflow
 
 ### LTX2_S2V_GGUF_12GB.json
